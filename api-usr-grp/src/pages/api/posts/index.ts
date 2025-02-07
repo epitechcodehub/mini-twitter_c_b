@@ -12,7 +12,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } else if (req.method === 'GET') {
     const posts = await db.all('SELECT * FROM Post');
     res.status(200).json(posts);
-  } else {
+  } else if (req.method === 'DELETE') {
+    const posts = await db.all('SELECT id FROM Post');
+    res.status(200).json({message: "Ok"});
+  }else {
     res.status(405).json({ message: 'Method not allowed' });
   }
 }
